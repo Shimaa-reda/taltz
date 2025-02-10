@@ -1,0 +1,201 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    height: 100vh;
+    /* overflow: hidden;  */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background: linear-gradient(180deg, rgba(75, 171, 67, 0.6) 0%, rgba(73, 169, 66, 0) 100%); */
+
+    background: linear-gradient(180deg, rgba(75, 171, 67, 0.5) 0%, rgba(73, 169, 66, 0) 100%), url('../images/background_img.png') no-repeat center center/100% 100%;
+
+}
+
+.container_que{
+    padding: 30px;
+    width: 33%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    /* margin-top: 80px; */
+    position: relative;
+   top: 20%;
+}
+@media screen and (orientation: portrait) {
+    .container_que {
+        top: 35%;
+        width: 55%;
+    }
+}
+/* Top Logo (Now inside .container) */
+.logo1 {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+.top_logo {
+    width: 100px;
+}
+
+/* Question Box */
+.question {
+    font-size: 30px;
+    margin: 10px 0;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    /* margin-top: 90px; */
+    margin-top: 40px;
+
+}
+
+/* Slider Container */
+.slider-container {
+    width: 100%;
+    position: relative;
+    flex-grow: 1; /* Takes available space dynamically */
+}
+.slider-value {
+    position: absolute;
+    top: -10px; 
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+    
+}
+
+.slider-value2{
+    bottom: 80px;
+    position: absolute;
+   
+    font-size: 18px;
+    transform: translateX(-50%);
+    color: gray;
+}
+.slider {
+    width: 100%;
+    accent-color: #49A942;
+}
+
+/* Progress Icons */
+.progress-icons {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.progress-icons .slider-value, #endLabel ,#startLabel , #endLabel2 ,#startLabel2{
+    height: 17px;
+    background-color: #7F7F7F;
+    padding: 6px;
+    border-radius: 17px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Icons */
+.icon-person, .icon-person2 {
+    font-size: 28px;
+    color: gray;
+}
+
+.icon-person.active, .icon-person2.active {
+    color: #49A942;
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #49A942;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px 10px;
+    box-shadow: 0px 0px 10px gray;
+    text-align: center;
+    width: 400px;
+}
+
+#modal-btn {
+    background-color: #49A942;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    color: white;
+    font-weight: bold;
+}
+
+#modal-img {
+    width: 50px;
+    margin-top: 20px;
+}
+
+.modal.correct {
+    color: #49A942;
+    font-weight: bold;
+}
+
+.modal.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+/* Bottom Logo */
+.bottom_logo {
+    width: 100px;
+    margin-top: auto; /* Pushes it to the bottom */
+    align-self: center;
+}
+#modal-img2{
+   
+    width:100%;
+}
+
+.slider-container {
+    position: relative; /* Allows positioning of child elements */
+    margin: 20px 0; /* Add some spacing */
+}
+
+.slider-label {
+    position: absolute; /* Position absolute to place it correctly */
+    left: 16px;
+   
+    top: 0;/* Vertically center it */
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+    font-weight: bold; /* Optional: make the label bold */
+}
+
+
+
+.slider-title {
+    position: absolute; /* Position absolute to place it correctly */
+    left: 40%;
+    top: 0;
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+    color: #49A942;
+    /* justify-content: center; */
+}

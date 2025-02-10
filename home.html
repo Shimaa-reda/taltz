@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background:  linear-gradient(180deg, rgba(75, 171, 67, 0.6) 0%, rgba(73, 169, 66, 0) 100%), url('./images/background_img.png') no-repeat center center/100% 100%;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #4dc0b5;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+             background: #49A942;
+            
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-top: 80%;
+        }
+        @media screen and (orientation: portrait) {
+       
+       .btn{
+           margin-top: 150%;
+       }
+}
+        .btn:hover {
+            background: #49A942;
+        }
+        .logo-top-right {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 100px;
+        }
+        .logo-bottom-center {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+        }
+        .logo-bottom-right {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 100px;
+        }
+        .text-bottom-left {
+            width: 90%; /* Adjust width for better alignment */
+            /* margin-top: 20px; */
+            font-size: 14px;
+            
+            text-align: start; /* Center text */
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <img src="./images/white_lilly.png" class="logo-top-right" alt="Top Right Logo">
+    <div class="container">
+        <a href="index.html" class="btn">Get Started</a>
+    </div>
+    <div class="text-bottom-left">
+        This information is intended for Health Care Professionals only. <br>
+        If you have any comments on the provided materials please communicate such to the SFDA on the unified number: 19999 <br>
+        For adverse events and safety reporting: email: saudi_pharmacovigilance@lilly.com  <br>
+        24/7 mobile: +966 567 868 843 Working hours Tel: +966 11 4617800, Ext: 1 <br>
+        For Lilly product information: email: SAUDI_MEDINFOQUERIES@lilly.com <br>
+        For further information, please contact: <br> 
+        Ell Lilly and Company, Scientific Office P.O. Box 92120 Riyadh 11653,<br> 
+        Kingdom of Saudi Arabia. <br> 
+        Tel: +966 11 461 7800 Fax: +966 111 217 9900 <br> 
+        email: Saudi_Pharmacovigilance@lilly.com <br>
+        Olumiant®, Lilly is registered trademarks of Ell Lilly and Company. <br>
+        ©2025 Eli Lilly and Company. All Rights Reserved.
+    </div>
+    
+    <img src="./images/bottom_logo_white.png" class="logo-bottom-center" alt="Bottom Center Logo">
+    <img src="./images/qr.png" class="logo-bottom-right" alt="Bottom Right Logo">
+</body>
+</html>
