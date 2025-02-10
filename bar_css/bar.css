@@ -34,7 +34,7 @@ body {
     height: auto;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     /* margin-top: 80px; */
     position: relative;
@@ -42,7 +42,7 @@ body {
 }
 @media screen and (orientation: portrait) {
     .container_que {
-        top: 20%;
+        top: 25%;
         width: 55%;
     }
 }
