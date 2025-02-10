@@ -1,6 +1,5 @@
 const questions = [
    
-    
     { 
         question: "What Patient’s expectations from PsO systemic treatment to deliver ? ", 
         answer: [16, 33],
@@ -11,7 +10,11 @@ const questions = [
         image: "./images/q1.png",
         label1: "50% improvement",
         label2: "100% improvement",
-        type: "circles"
+        type: "circles",
+        // color1: "red",  
+        color1: "#49A942",  
+        color2: "#49A942",
+        
     },
     { 
         question: "Taltz improved mean PASI score by ….% by week 2.", 
@@ -19,7 +22,9 @@ const questions = [
         min1: 0,
         max1: 100,
         image: "./images/q2.png",
-        type: "circles"
+        type: "circles",
+        color1: "#49A942",  
+        
     },
     { 
         question: "How many patients will maintain the following efficacy endpoints on Taltz over 5 Year?", 
@@ -31,7 +36,9 @@ const questions = [
         image: "./images/q3.png",
         label1: "Complete skin clearance (PASI 100)",
         label2: "Almost complete skin clearance (PASI 90)",
-        type: "persons"
+        type: "persons",
+        color1: "#49A942",  
+        color2: "#49A942"
     },
     { 
         question: "In the PSoHO study, how would the durability* of Taltz compare to other treatment options like Risankizumab and Secukinumab ?", 
@@ -47,6 +54,9 @@ const questions = [
         label2: "Risankizumab",
         label3:"Secukinumab",
         type: "circles",
+        color1: "#49A942",  
+        color2: "#5370D9",
+        color3: "#B89855",  
         note:"* durability is defined as having a rapid and lasting response that was measured by % of patients achieving PASI 90 at week 12, and maintained it at week 24 and 52"
 
     },
@@ -60,7 +70,9 @@ const questions = [
         label1: "Taltz",
         label2: "Guselkumab",
         image: "./images/q5.png",
-        type: "persons"
+        type: "persons",
+        color1: "#49A942",  
+        color2: "#6EBDC4"
     },
     { 
         question: "Out of 10 patients, how many experienced no radiographic changes over a 3-year journey with Taltz?", 
@@ -68,7 +80,9 @@ const questions = [
         min1: 0, 
         max1: 10,
         image: "./images/q6.png",
-        type: "persons"
+        type: "persons",
+        color1: "#49A942",  
+
     }
 ];
 
@@ -76,34 +90,47 @@ let currentQuestionIndex = 0;
 
 function loadQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
-    document.getElementById('question').textContent = currentQuestion.question;
+    const superscripts = ["¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰"]; // Up to 10, extend if needed
+
+    // Append the superscript to the question
+    document.getElementById('question').textContent = currentQuestion.question + (superscripts[currentQuestionIndex] || '');
 
     // Set up the first slider
-    document.getElementById('range1').min = currentQuestion.min1; 
-    document.getElementById('range1').max = currentQuestion.max1; 
-    document.getElementById('range1').value = 0;
-    updateSliderValue(document.getElementById('range1'), document.getElementById('sliderValue1'));
+    const range1 = document.getElementById('range1');
+    range1.min = currentQuestion.min1; 
+    range1.max = currentQuestion.max1; 
+    range1.value = 0;
+    updateLabelColor('label1', currentQuestion.color1); 
+    updateLabelColor('label2', questions[currentQuestionIndex].color2); // Update label color
+    updateLabelColor('label3', questions[currentQuestionIndex].color3); // Update label color
+    updateSliderValue(range1, document.getElementById('sliderValue1'));
 
-    // Update labels for the first slider
-     // Update labels with min and max values
-     document.getElementById('startLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.min1}%` : `${currentQuestion.min1}`;
-     document.getElementById('endLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.max1}%` : `${currentQuestion.max1}`;
- 
+    // Update labels with min and max values
+    document.getElementById('startLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.min1}%` : `${currentQuestion.min1}`;
+    document.getElementById('endLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.max1}%` : `${currentQuestion.max1}`;
+
+    
     document.getElementById('label1').textContent = currentQuestion.label1 || '';
     document.getElementById('title1').textContent = currentQuestion.title1 || '';
+
+    // Set the color for the first slider
+    range1.style.background = currentQuestion.color1;
 
     // Check if there is a second slider
     if (currentQuestion.answer.length > 1) {
         document.getElementById('secondSliderContainer').style.display = 'block';
-        document.getElementById('range2').min = currentQuestion.min2; 
-        document.getElementById('range2').max = currentQuestion.max2; 
-        document.getElementById('range2').value = 0;
-        updateSliderValue(document.getElementById('range2'), document.getElementById('sliderValue2'));
+        const range2 = document.getElementById('range2');
+        range2.min = currentQuestion.min2; 
+        range2.max = currentQuestion.max2; 
+        range2.value = 0;
+        updateSliderValue(range2, document.getElementById('sliderValue2'));
         document.getElementById('startLabel2').textContent = (currentQuestion.min2 === 0 && currentQuestion.max2 === 100) ? `${currentQuestion.min2}%` : `${currentQuestion.min2}`;
         document.getElementById('endLabel2').textContent = (currentQuestion.min2 === 0 && currentQuestion.max2 === 100) ? `${currentQuestion.max2}%` : `${currentQuestion.max2}`;
     
         document.getElementById('label2').textContent = currentQuestion.label2 || '';
-        document.getElementById('title2').textContent = currentQuestion.title2 || '';
+
+        // Set the color for the second slider
+        range2.style.background = currentQuestion.color2;
     } else {
         document.getElementById('secondSliderContainer').style.display = 'none';
     }
@@ -111,26 +138,36 @@ function loadQuestion() {
     // Check if there is a third slider
     if (currentQuestion.answer.length > 2) {
         document.getElementById('thirdSliderContainer').style.display = 'block';
-        document.getElementById('range3').min = currentQuestion.min3 || 0; 
-        document.getElementById('range3').max = currentQuestion.max3 || 100; 
-        document.getElementById('range3').value = 0;
-        updateSliderValue(document.getElementById('range3'), document.getElementById('sliderValue3'));
+        const range3 = document.getElementById('range3');
+        range3.min = currentQuestion.min3; 
+        range3.max = currentQuestion.max3; 
+        range3.value = 0;
+        updateSliderValue(range3, document.getElementById('sliderValue3'));
         document.getElementById('startLabel3').textContent = (currentQuestion.min3 === 0 && currentQuestion.max3 === 100) ? `${currentQuestion.min3}%` : `${currentQuestion.min3}`;
         document.getElementById('endLabel3').textContent = (currentQuestion.min3 === 0 && currentQuestion.max3 === 100) ? `${currentQuestion.max3}%` : `${currentQuestion.max3}`;
     
         document.getElementById('label3').textContent = currentQuestion.label3 || '';
-        document.getElementById('title3').textContent = currentQuestion.title3 || '';
+
+        // Set the color for the third slider
+        range3.style.background = currentQuestion.color3 || currentQuestion.color2; // Fallback to color2 if not defined
     } else {
         document.getElementById('thirdSliderContainer').style.display = 'none';
     }
 
     // Generate icons based on the type and number of answers
-    generateIcons(currentQuestion.type, 'icon-person', '.slider-container');
+    generateIcons(currentQuestion.type, 'icon-person', '.slider-container', currentQuestion.color1);
     if (currentQuestion.answer.length > 1) {
-        generateIcons(currentQuestion.type, 'icon-person2', '#secondSliderContainer');
+        generateIcons(currentQuestion.type, 'icon-person2', '#secondSliderContainer', currentQuestion.color2);
     }
     if (currentQuestion.answer.length > 2) {
-        generateIcons(currentQuestion.type, 'icon-person3', '#thirdSliderContainer');
+        generateIcons(currentQuestion.type, 'icon-person3', '#thirdSliderContainer', currentQuestion.color3 );
+    }
+    if(currentQuestion.note){
+        document.getElementById('note').style.display = 'block';
+        document.getElementById('note').textContent = currentQuestion.note;
+    }
+    else{
+        document.getElementById('note').style.display = 'none';
     }
 }
 
@@ -164,19 +201,33 @@ function updateSliderValue(slider, display) {
 
 document.getElementById('range1').addEventListener('input', function() {
     updateSliderValue(this, document.getElementById('sliderValue1'));
-    updatePersonIcons(this.value, 20); // Update person icons when the slider moves
+    updatePersonIcons(this.value, 20, questions[currentQuestionIndex].color1);
+    updateSliderAccentColor(this, questions[currentQuestionIndex].color1); // Update slider accent color
+   
 });
 
 document.getElementById('range2').addEventListener('input', function() {
     updateSliderValue(this, document.getElementById('sliderValue2'));
-    updatePersonIcons2(this.value, 20); // Update the second slider's icons
+    updatePersonIcons2(this.value, 20, questions[currentQuestionIndex].color2);
+    updateSliderAccentColor(this, questions[currentQuestionIndex].color2); // Update slider accent color
+    
 });
-// Add event listener for the third slider
+
 document.getElementById('range3').addEventListener('input', function() {
     updateSliderValue(this, document.getElementById('sliderValue3'));
-    updatePersonIcons3(this.value, 20); // Update the third slider's icons
+    updatePersonIcons3(this.value, 20, questions[currentQuestionIndex].color3);
+    updateSliderAccentColor(this, questions[currentQuestionIndex].color3); // Update slider accent color
+    
 });
-function updatePersonIcons(value, totalIcons) {
+
+function updateLabelColor(labelId, color) {
+    const label = document.getElementById(labelId); // Get the label element
+    if (label) {
+        label.style.color = color; // Set the label color
+    }
+}
+
+function updatePersonIcons(value, totalIcons, color) {
     const min = parseFloat(document.getElementById('range1').min);
     const max = parseFloat(document.getElementById('range1').max);
     const range = max - min;
@@ -188,13 +239,15 @@ function updatePersonIcons(value, totalIcons) {
     icons.forEach((icon, index) => {
         if (index < iconCount) {
             icon.classList.add('active');
+            icon.style.color = color; // Set active icon color
         } else {
             icon.classList.remove('active');
+            icon.style.color = "white"; // Set inactive icon color to white
         }
     });
 }
 
-function updatePersonIcons2(value, totalIcons) {
+function updatePersonIcons2(value, totalIcons, color) {
     const min = parseFloat(document.getElementById('range2').min);
     const max = parseFloat(document.getElementById('range2').max);
     const range = max - min;
@@ -206,13 +259,15 @@ function updatePersonIcons2(value, totalIcons) {
     icons.forEach((icon, index) => {
         if (index < iconCount) {
             icon.classList.add('active');
+            icon.style.color = color; // Set active icon color
         } else {
             icon.classList.remove('active');
+            icon.style.color = "white"; // Set inactive icon color to white
         }
     });
 }
-// Function to update icons based on the third slider value
-function updatePersonIcons3(value, totalIcons) {
+
+function updatePersonIcons3(value, totalIcons, color) {
     const min = parseFloat(document.getElementById('range3').min);
     const max = parseFloat(document.getElementById('range3').max);
     const range = max - min;
@@ -224,10 +279,15 @@ function updatePersonIcons3(value, totalIcons) {
     icons.forEach((icon, index) => {
         if (index < iconCount) {
             icon.classList.add('active');
+            icon.style.color = color; // Set active icon color
         } else {
             icon.classList.remove('active');
+            icon.style.color = "white"; // Set inactive icon color to white
         }
     });
+}
+function updateSliderAccentColor(slider, color) {
+    slider.style.accentColor = color; // Set the accent color of the slider
 }
 document.getElementById('submit').addEventListener('click', function() {
     const currentQuestion = questions[currentQuestionIndex];

@@ -2,24 +2,38 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "questions";
     text-align: center;
     height: 100vh;
     /* overflow: hidden;  */
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-between;
+    
     /* background: linear-gradient(180deg, rgba(75, 171, 67, 0.6) 0%, rgba(73, 169, 66, 0) 100%); */
 
     background: linear-gradient(180deg, rgba(75, 171, 67, 0.5) 0%, rgba(73, 169, 66, 0) 100%), url('../images/background_img.png') no-repeat center center/100% 100%;
 
 }
-
+@font-face{
+    font-family: "questions";
+    src: url("../fonts/NewsGothicStd-Bold.otf");
+    
+}
+@font-face{
+    font-family: "note";
+    src: url("../fonts/NewsGothicStd.otf");
+    font-weight: 700
+}
+.note{
+    font-family: "note";
+}
 .container_que{
     padding: 30px;
     width: 38%;
     height: auto;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     /* margin-top: 80px; */
@@ -55,6 +69,7 @@ body {
     /* margin-top: 90px; */
     /* margin-top: 40px; */
     line-height: 1.25;
+    font-family: "questions";
     color: rgba(66, 66, 66, 1);
 
 }
@@ -209,3 +224,4 @@ body {
     font-size: 16px; /* Adjust the size as needed */
     margin-right: 7px;
 }
+
