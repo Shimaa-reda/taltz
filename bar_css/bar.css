@@ -18,17 +18,17 @@ body {
 
 .container_que{
     padding: 30px;
-    width: 33%;
+    width: 38%;
     height: auto;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     /* margin-top: 80px; */
     position: relative;
-   top: 20%;
+   /* top: 8%; */
 }
 @media screen and (orientation: portrait) {
     .container_que {
-        top: 35%;
+        top: 20%;
         width: 55%;
     }
 }
@@ -53,7 +53,9 @@ body {
     width: 100%;
     box-sizing: border-box;
     /* margin-top: 90px; */
-    margin-top: 40px;
+    /* margin-top: 40px; */
+    line-height: 1.25;
+    color: rgba(66, 66, 66, 1);
 
 }
 
@@ -93,22 +95,26 @@ body {
     padding: 10px 0;
 }
 
-.progress-icons .slider-value, #endLabel ,#startLabel , #endLabel2 ,#startLabel2{
+.progress-icons .slider-value, #endLabel ,#startLabel , #endLabel2 ,#startLabel2, #endLabel3 ,#startLabel3{
     height: 17px;
-    background-color: #7F7F7F;
+    /* background-color: #7F7F7F; */
+    background-color:  rgba(127, 127, 127, 0.33)    ;
     padding: 6px;
     border-radius: 17px;
-    color: white;
+    /* color: white; */
+    width: 50px;
+    color: rgb(66 66 66 / 77%);
+
     font-weight: bold;
 }
 
 /* Icons */
-.icon-person, .icon-person2 {
+.icon-person, .icon-person2 ,.icon-person3{
     font-size: 28px;
-    color: gray;
+    color: white;
 }
 
-.icon-person.active, .icon-person2.active {
+.icon-person.active, .icon-person2.active ,.icon-person3.active {
     color: #49A942;
 }
 
@@ -181,14 +187,12 @@ body {
 }
 
 .slider-label {
-    position: absolute; /* Position absolute to place it correctly */
-    left: 16px;
-   
-    top: 0;/* Vertically center it */
+    position: relative; /* Position absolute to place it correctly */
+    top: -25px;
     transform: translateY(-50%); /* Adjust for vertical alignment */
-    font-weight: bold; /* Optional: make the label bold */
+   color: #49A942;
+   font-weight: bold;
 }
-
 
 
 .slider-title {
@@ -198,4 +202,10 @@ body {
     transform: translateY(-50%); /* Adjust for vertical alignment */
     color: #49A942;
     /* justify-content: center; */
+}
+
+
+.fa-circle {
+    font-size: 16px; /* Adjust the size as needed */
+    margin-right: 7px;
 }
