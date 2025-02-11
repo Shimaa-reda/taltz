@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: "questions";
             background:  linear-gradient(180deg, rgba(75, 171, 67, 0.6) 0%, rgba(73, 169, 66, 0) 100%), url('./images/background_img.png') no-repeat center center/100% 100%;
             width: 100vw;
             height: 100vh;
@@ -20,6 +20,16 @@
             color: black;
             position: relative;
         }
+        @font-face{
+    font-family: "questions";
+    src: url("../fonts/NewsGothicStd-Bold.otf");
+    
+}
+@font-face{
+    font-family: "note";
+    src: url("../fonts/NewsGothicStd.otf");
+    font-weight: 700
+}
         .container {
             width: 90%;
             max-width: 400px;
@@ -73,12 +83,12 @@
             width: 100px;
         }
         .text-bottom-left {
-            width: 90%; /* Adjust width for better alignment */
+            width: 95%; /* Adjust width for better alignment */
             /* margin-top: 20px; */
             font-size: 14px;
             
             text-align: start; /* Center text */
-            line-height: 1.5;
+            line-height: 1.75;
         }
     </style>
 </head>
@@ -102,7 +112,7 @@
         ©2025 Eli Lilly and Company. All Rights Reserved.
     </div>
     
-    <img src="./images/bottom_logo_white.png" class="logo-bottom-center" alt="Bottom Center Logo">
+    <img src="./images/taltz.png" class="logo-bottom-center" alt="Bottom Center Logo">
     <img src="./images/qr.png" class="logo-bottom-right" alt="Bottom Right Logo">
 </body>
 </html>
