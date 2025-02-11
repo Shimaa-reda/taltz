@@ -100,16 +100,23 @@ function loadQuestion() {
     range1.min = currentQuestion.min1; 
     range1.max = currentQuestion.max1; 
     range1.value = 0;
-    updateLabelColor('label1', currentQuestion.color1); 
-    updateLabelColor('label2', questions[currentQuestionIndex].color2); // Update label color
-    updateLabelColor('label3', questions[currentQuestionIndex].color3); // Update label color
+    updateLabelColor('label1', currentQuestion.color1);
+    updateLabelColor('label2', currentQuestion.color2);
+    updateLabelColor('label3', currentQuestion.color3);
     updateSliderValue(range1, document.getElementById('sliderValue1'));
 
-    // Update labels with min and max values
-    document.getElementById('startLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.min1}%` : `${currentQuestion.min1}`;
-    document.getElementById('endLabel').textContent = (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) ? `${currentQuestion.max1}%` : `${currentQuestion.max1}`;
+    // Determine first slider labels
+    if (currentQuestionIndex === 0) {
+        document.getElementById('startLabel').textContent = "0 Days";
+        document.getElementById('endLabel').textContent = "60 Days";
+    } else if (currentQuestion.min1 === 0 && currentQuestion.max1 === 100) {
+        document.getElementById('startLabel').textContent = "0%";
+        document.getElementById('endLabel').textContent = "100%";
+    } else {
+        document.getElementById('startLabel').textContent = currentQuestion.min1;
+        document.getElementById('endLabel').textContent = currentQuestion.max1;
+    }
 
-    
     document.getElementById('label1').textContent = currentQuestion.label1 || '';
     document.getElementById('title1').textContent = currentQuestion.title1 || '';
 
@@ -124,9 +131,19 @@ function loadQuestion() {
         range2.max = currentQuestion.max2; 
         range2.value = 0;
         updateSliderValue(range2, document.getElementById('sliderValue2'));
-        document.getElementById('startLabel2').textContent = (currentQuestion.min2 === 0 && currentQuestion.max2 === 100) ? `${currentQuestion.min2}%` : `${currentQuestion.min2}`;
-        document.getElementById('endLabel2').textContent = (currentQuestion.min2 === 0 && currentQuestion.max2 === 100) ? `${currentQuestion.max2}%` : `${currentQuestion.max2}`;
-    
+
+        // Determine second slider labels
+        if (currentQuestionIndex === 0) {
+            document.getElementById('startLabel2').textContent = "0 Days";
+            document.getElementById('endLabel2').textContent = "120 Days";
+        } else if (currentQuestion.min2 === 0 && currentQuestion.max2 === 100) {
+            document.getElementById('startLabel2').textContent = "0%";
+            document.getElementById('endLabel2').textContent = "100%";
+        } else {
+            document.getElementById('startLabel2').textContent = currentQuestion.min2;
+            document.getElementById('endLabel2').textContent = currentQuestion.max2;
+        }
+
         document.getElementById('label2').textContent = currentQuestion.label2 || '';
 
         // Set the color for the second slider
@@ -143,9 +160,16 @@ function loadQuestion() {
         range3.max = currentQuestion.max3; 
         range3.value = 0;
         updateSliderValue(range3, document.getElementById('sliderValue3'));
-        document.getElementById('startLabel3').textContent = (currentQuestion.min3 === 0 && currentQuestion.max3 === 100) ? `${currentQuestion.min3}%` : `${currentQuestion.min3}`;
-        document.getElementById('endLabel3').textContent = (currentQuestion.min3 === 0 && currentQuestion.max3 === 100) ? `${currentQuestion.max3}%` : `${currentQuestion.max3}`;
-    
+
+        // Determine third slider labels
+        if (currentQuestion.min3 === 0 && currentQuestion.max3 === 100) {
+            document.getElementById('startLabel3').textContent = "0%";
+            document.getElementById('endLabel3').textContent = "100%";
+        } else {
+            document.getElementById('startLabel3').textContent = currentQuestion.min3;
+            document.getElementById('endLabel3').textContent = currentQuestion.max3;
+        }
+
         document.getElementById('label3').textContent = currentQuestion.label3 || '';
 
         // Set the color for the third slider
@@ -160,16 +184,19 @@ function loadQuestion() {
         generateIcons(currentQuestion.type, 'icon-person2', '#secondSliderContainer', currentQuestion.color2);
     }
     if (currentQuestion.answer.length > 2) {
-        generateIcons(currentQuestion.type, 'icon-person3', '#thirdSliderContainer', currentQuestion.color3 );
+        generateIcons(currentQuestion.type, 'icon-person3', '#thirdSliderContainer', currentQuestion.color3);
     }
-    if(currentQuestion.note){
+    
+    // Handle notes if available
+    if (currentQuestion.note) {
         document.getElementById('note').style.display = 'block';
         document.getElementById('note').textContent = currentQuestion.note;
-    }
-    else{
+    } else {
         document.getElementById('note').style.display = 'none';
     }
 }
+
+
 
 function generateIcons(type, iconClass, containerSelector) {
     const container = document.querySelector(containerSelector);
@@ -182,9 +209,9 @@ function generateIcons(type, iconClass, containerSelector) {
     for (let i = 0; i < totalIcons; i++) {
         const icon = document.createElement('i');
         if (type === "circles") {
-            icon.className = `fa-solid fa-circle ${iconClass}`; // Use circle icons for circle type
+            icon.className = `fa-solid fa-circle ${iconClass}`; 
         } else {
-            icon.className = `fa-solid fa-person ${iconClass}`; // Use person icons for person type
+            icon.className = `fa-solid fa-person ${iconClass}`; 
         }
         container.appendChild(icon);
     }
@@ -192,12 +219,26 @@ function generateIcons(type, iconClass, containerSelector) {
 
 function updateSliderValue(slider, display) {
     const value = slider.value;
-    display.textContent = `${value}${slider.max == 100 ? '%' : ''}`;
-    
-    // Calculate the position for the display
-    const percentage = (value - slider.min) / (slider.max - slider.min) * 100;
+    const min = parseInt(slider.min, 10);
+    const max = parseInt(slider.max, 10);
+
+    // Determine the correct unit
+    let unit = "";
+    if (currentQuestionIndex === 0 || (min === 0 && (max === 60 || max === 120))) {
+        unit = " Days";
+    } else if (min === 0 && max === 100) {
+        unit = "%";
+    }
+
+    // Update display value
+    display.textContent = `${value}${unit}`;
+
+    // Adjust position dynamically
+    const percentage = ((value - min) / (max - min)) * 100;
     display.style.left = `${percentage}%`;
 }
+
+
 
 document.getElementById('range1').addEventListener('input', function() {
     updateSliderValue(this, document.getElementById('sliderValue1'));
@@ -301,6 +342,10 @@ document.getElementById('submit').addEventListener('click', function() {
         correctAnswerText += "%"; // Append % if the range is from 0 to 100
     }
 
+    if (currentQuestionIndex === 0) {
+        correctAnswerText += " Days"; // Append % if the range is from 0 to 100
+    }
+
     if (currentQuestion.answer.length > 1) {
         const userAnswer2 = parseFloat(document.getElementById('range2').value);
         const correctAnswer2 = currentQuestion.answer[1];
@@ -324,7 +369,8 @@ document.getElementById('submit').addEventListener('click', function() {
 
     document.getElementById('modal-text').innerHTML = isCorrect 
     ? '<span style="color: #49A942; font-weight:bold">Correct answer!</span> '
-    : `<span style="color: red; font-weight:bold">Oh!</span><br><br><span style="color: green;">${correctAnswerText}</span>`;
+    : `<span style="color: red; font-weight:bold">Oh!</span><br><br>
+       <span style="color: green;">${currentQuestionIndex === 0 ? correctAnswerText + " Days" : correctAnswerText}</span>`;
 
     document.getElementById('modal-img').src = isCorrect ? "./images/like.png" : "./images/sad.png";
 

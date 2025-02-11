@@ -12,7 +12,7 @@ body {
     
     /* background: linear-gradient(180deg, rgba(75, 171, 67, 0.6) 0%, rgba(73, 169, 66, 0) 100%); */
 
-    background: linear-gradient(180deg, rgba(75, 171, 67, 0.5) 0%, rgba(73, 169, 66, 0) 100%), url('../images/background_img.png') no-repeat center center/100% 100%;
+    background: linear-gradient(180deg, rgba(75, 171, 67, 0.5) 0%, rgba(73, 169, 66, 0) 100%), url('../images/background_image.png') no-repeat center center/100% 100%;
 
 }
 @font-face{
@@ -34,7 +34,7 @@ body {
     height: auto;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 20px;
     /* margin-top: 80px; */
     position: relative;
@@ -110,23 +110,32 @@ body {
     padding: 10px 0;
 }
 
-.progress-icons .slider-value, #endLabel ,#startLabel , #endLabel2 ,#startLabel2, #endLabel3 ,#startLabel3{
-    height: 17px;
+.progress-icons .slider-value,#endLabel ,#startLabel , #endLabel2 ,#startLabel2, #endLabel3 ,#startLabel3{
+    height: auto;
     /* background-color: #7F7F7F; */
-    background-color:  rgba(127, 127, 127, 0.33)    ;
-    padding: 6px;
+    background-color: rgba(127, 127, 127, 0.33);
+    padding: 5px;
     border-radius: 17px;
     /* color: white; */
-    width: 50px;
+    width: 80px;
     color: rgb(66 66 66 / 77%);
-
     font-weight: bold;
-}
 
+}
+/* .progress-icons .slider-value{
+    width: 70px;
+    background-color: rgba(127, 127, 127, 0.33);
+    padding: 8px;
+    border-radius: 17px;
+    color: rgb(66 66 66 / 77%);
+    font-weight: bold;
+
+} */
 /* Icons */
 .icon-person, .icon-person2 ,.icon-person3{
     font-size: 28px;
     color: white;
+    
 }
 
 .icon-person.active, .icon-person2.active ,.icon-person3.active {
